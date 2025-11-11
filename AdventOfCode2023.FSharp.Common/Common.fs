@@ -67,10 +67,31 @@ let (|Regex|_|) pattern input =
        None
 
 
+let RegexMulti pattern input =
+   let ms = Regex.Matches(input, pattern) |> seq
+   ms
+   |> Seq.filter _.Success
+   |> Seq.map (fun m -> List.tail [ for g in m.Groups -> g.Value ])
+
+let RegexMultiIdx pattern input =
+   let ms = Regex.Matches(input, pattern) |> seq
+   ms
+   |> Seq.filter _.Success
+   |> Seq.map (fun m -> m.Index, List.tail [ for g in m.Groups -> g.Value ])
+
+
 let (|Int|_|) (str: string) =
     let mutable intvalue = 0
 
     if System.Int32.TryParse(str, &intvalue) then
+        Some(intvalue)
+    else
+        None
+
+let (|Int64|_|) (str: string) =
+    let mutable intvalue: int64 = 0
+
+    if System.Int64.TryParse(str, &intvalue) then
         Some(intvalue)
     else
         None
