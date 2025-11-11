@@ -7,14 +7,16 @@
 
   <ItemGroup>
 
+    <Compile Include="Day02.fs" />
+
+    <Content Include="input.txt" />
+
     <Compile Include="Day01.fs" />
 
     <Content Include="input01.txt" />
 
     <Compile Include="Program.fs" />
   </ItemGroup>
-
-  <ItemGroup />
 
   <ItemGroup>
     <ProjectReference Include="..\AdventOfCode2023.FSharp.Common\AdventOfCode2023.FSharp.Common.fsproj" />
