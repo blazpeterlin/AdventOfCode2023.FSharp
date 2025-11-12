@@ -68,13 +68,13 @@ let (|Regex|_|) pattern input =
 
 
 let RegexMulti pattern input =
-   let ms = Regex.Matches(input, pattern) |> seq
+   let ms = Regex.Matches(input, $"(?=({pattern}))") |> seq
    ms
    |> Seq.filter _.Success
    |> Seq.map (fun m -> List.tail [ for g in m.Groups -> g.Value ])
 
 let RegexMultiIdx pattern input =
-   let ms = Regex.Matches(input, pattern) |> seq
+   let ms = Regex.Matches(input, $"(?=({pattern}))") |> seq
    ms
    |> Seq.filter _.Success
    |> Seq.map (fun m -> m.Index, List.tail [ for g in m.Groups -> g.Value ])
